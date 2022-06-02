@@ -37,6 +37,7 @@ class Creation():
         self.writer: String
         self.copy: String
         self.genre: String
+        self.breakYN: String = 'N'
         pass
 
     def __repr__(self) -> str:
@@ -125,6 +126,11 @@ def main():
                 creation.ageRate = AgeRate.RATE_15.value
             elif age == "18세 이용가":
                 creation.ageRate = AgeRate.RATE_18.value
+
+        ico_break = driver.find_elements(
+            by=By.CSS_SELECTOR, value=".detail .ico_break")
+        if len(ico_break) > 0:
+            creation.breakYN = 'Y'
 
         creation.writer = writer
         creation.copy = copy
