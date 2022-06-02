@@ -9,8 +9,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 class AgeRate(Enum):
     ALL = 1
-    RATE_15 = 2
-    RATE_18 = 3
+    RATE_12 = 2
+    RATE_15 = 3
+    RATE_18 = 4
 
 
 class WebtoonViewerType(Enum):
@@ -93,9 +94,7 @@ def main():
         if len(elements) > 0:
             for element in elements:
                 class_name = element.get_attribute("class")
-                if class_name == 'mark_adult_thumb':
-                    creation.ageRate = AgeRate.RATE_18.value
-                elif class_name == 'ico_new2':
+                if class_name == 'ico_new2':
                     creation.newYN = 'Y'
                 elif class_name == 'ico_short_ani':
                     creation.shortAniYN = 'Y'
@@ -112,6 +111,21 @@ def main():
             by=By.CSS_SELECTOR, value=".detail h2 + p").text
         genre = driver.find_element(
             by=By.CSS_SELECTOR, value=".detail_info .genre").text
+        age = driver.find_elements(
+            by=By.CSS_SELECTOR, value=".detail_info .age")
+
+        if len(age) > 0:
+            age = age.pop()
+            age = age.text
+            if age == "전체연령가":
+                creation.ageRate = AgeRate.ALL.value
+            elif age == "12세 이용가":
+                creation.ageRate = AgeRate.RATE_12.value
+            elif age == "15세 이용가":
+                creation.ageRate = AgeRate.RATE_15.value
+            elif age == "18세 이용가":
+                creation.ageRate = AgeRate.RATE_18.value
+
         creation.writer = writer
         creation.copy = copy
         creation.genre = genre
