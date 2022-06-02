@@ -37,7 +37,6 @@ class Creation():
         self.writer: String
         self.copy: String
         self.genre: String
-        self.breakYN: String = 'N'
         pass
 
     def __repr__(self) -> str:
@@ -130,7 +129,7 @@ def main():
         ico_break = driver.find_elements(
             by=By.CSS_SELECTOR, value=".detail .ico_break")
         if len(ico_break) > 0:
-            creation.breakYN = 'Y'
+            creation.restYN = 'Y'
 
         creation.writer = writer
         creation.copy = copy
