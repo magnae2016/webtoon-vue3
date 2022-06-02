@@ -33,6 +33,9 @@ class Creation():
         self.thumbnailFilename: String
         self.thumbnailFilepath: String
         self.thumbnailImageAlt: String
+        self.writer: String
+        self.copy: String
+        self.genre: String
         pass
 
     def __repr__(self) -> str:
@@ -55,7 +58,9 @@ def main():
     img_list = driver.find_element(By.CLASS_NAME, 'img_list')
     list = img_list.find_elements(by=By.TAG_NAME, value="li")
 
-    for li in list:
+    for i in range(len(list)):
+        li = driver.find_elements(
+            by=By.CSS_SELECTOR, value=f".img_list li")[i]
         creation = Creation()
         src = li.find_element(by=By.TAG_NAME, value="img").get_attribute("src")
         filepath = src[len(SHARED_COMIC_PSTATIC_URL):]
@@ -99,6 +104,19 @@ def main():
                 elif class_name == 'finish':
                     creation.finished = 'Y'
                 pass
+
+        li.find_element(
+            by=By.XPATH, value=".//div[@class='thumb']/a").click()
+        writer = driver.find_element(by=By.CLASS_NAME, value="wrt_nm").text
+        copy = driver.find_element(
+            by=By.CSS_SELECTOR, value=".detail h2 + p").text
+        genre = driver.find_element(
+            by=By.CSS_SELECTOR, value=".detail_info .genre").text
+        creation.writer = writer
+        creation.copy = copy
+        creation.genre = genre
+
+        driver.back()
         print(creation)
 
     driver.quit()
