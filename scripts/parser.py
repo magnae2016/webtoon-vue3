@@ -42,7 +42,13 @@ class Creation():
 def main():
     SHARED_COMIC_PSTATIC_URL = 'https://shared-comic.pstatic.net/thumb/webtoon'
 
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+
+    driver = webdriver.Chrome(
+        ChromeDriverManager().install(), chrome_options=chrome_options)
 
     driver.get("https://comic.naver.com/webtoon/genre?genre=episode")
 
