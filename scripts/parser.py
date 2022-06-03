@@ -33,6 +33,9 @@ class Weekday(Enum):
     SUN = 'sun'
 
 
+weekdayList: list = [w.value for w in Weekday]
+
+
 class Genre(Enum):
     episode = auto()
     omnibus = auto()
@@ -86,10 +89,18 @@ class Creation():
         self.genre1: str
         self.genre2: str
         self.week: list = list()
+        self.weekday: str = 'NNNNNNN'
         pass
 
     def __repr__(self) -> str:
         return json.dumps(self.__dict__, ensure_ascii=False)
+
+    def updateWeekday(self, weekday: Weekday) -> None:
+        index = weekdayList.index(weekday.value)
+        weekday = self.weekday
+        w = list(weekday)
+        w[index] = 'Y'
+        self.weekday = ''.join(w)
 
 
 def main():
@@ -104,7 +115,6 @@ def main():
         ChromeDriverManager().install(), chrome_options=chrome_options)
 
     creationList: dict = OrderedDict()
-    weekdayList: list = [w.value for w in Weekday]
 
     weekday = 'mon'
     driver.get(f"https://comic.naver.com/webtoon/weekdayList?week={weekday}")
@@ -124,6 +134,8 @@ def main():
         titleId = int(filepath[1:filepath[1:].index('/')+1])
         creation = creationList.get(str(titleId)) or Creation()
         creation.week.append(weekday)
+        creation.updateWeekday(Weekday[weekday.upper()])
+
         if len(creation.week) > 1:
             continue
 
