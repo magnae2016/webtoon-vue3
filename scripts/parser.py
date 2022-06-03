@@ -1,3 +1,4 @@
+import os
 import json
 from enum import Enum, auto
 from tokenize import Number, String
@@ -6,6 +7,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from collections import OrderedDict
+import urllib.request
 import pprint
 pp = pprint.PrettyPrinter(depth=4)
 
@@ -103,8 +105,15 @@ class Creation():
         self.weekdayYN = ''.join(w)
 
 
+def saveImage(url: str, filename: str, savedDirectory: str) -> None:
+    urllib.request.urlretrieve(url, os.path.join(savedDirectory, filename))
+
+
 def main():
     SHARED_COMIC_PSTATIC_URL = 'https://shared-comic.pstatic.net/thumb/webtoon'
+
+    if not os.path.exists('thumbnail'):
+        os.makedirs('thumbnail')
 
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
@@ -145,6 +154,7 @@ def main():
             creation.thumbnailFilename = thumbnailFilename.strip()
             creation.thumbnailFilepath = thumbnailFilepath.strip()
             creation.titleId = titleId
+            saveImage(src, thumbnailFilename, 'thumbnail')
 
             dl = li.find_element(by=By.TAG_NAME, value="dl")
             titleName = dl.find_element(
