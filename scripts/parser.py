@@ -19,6 +19,7 @@ class AgeRate(Enum):
 class WebtoonViewerType(Enum):
     DEFAULT = 1
     CUTTOON = 2
+    SHORTANI = 3
 
 
 class Weekday(Enum):
@@ -35,7 +36,6 @@ class Creation():
     def __init__(self) -> None:
         self.ageRate: AgeRate = AgeRate.ALL.value
         self.newYN: str = 'N'
-        self.shortAniYN: str = 'N'
         self.webtoonViewerType: WebtoonViewerType = WebtoonViewerType.DEFAULT.value
         self.finished: str = 'N'
         self.restYN: str = 'N'
@@ -117,7 +117,7 @@ def main():
                 if class_name == 'ico_new2':
                     creation.newYN = 'Y'
                 elif class_name == 'ico_short_ani':
-                    creation.shortAniYN = 'Y'
+                    creation.webtoonViewerType = WebtoonViewerType.SHORTANI
                 elif class_name == 'ico_cut':
                     creation.webtoonViewerType = WebtoonViewerType.CUTTOON.value
                 elif class_name == 'finish':
