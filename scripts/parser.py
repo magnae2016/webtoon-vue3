@@ -1,10 +1,11 @@
 import json
-from enum import Enum
+from enum import Enum, auto
 from tokenize import Number, String
 from xmlrpc.client import Boolean
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+from collections import OrderedDict
 import pprint
 pp = pprint.PrettyPrinter(depth=4)
 
@@ -32,6 +33,40 @@ class Weekday(Enum):
     SUN = 'sun'
 
 
+class Genre(Enum):
+    episode = auto()
+    omnibus = auto()
+    story = auto()
+    daily = auto()
+    comic = auto()
+    fantasy = auto()
+    action = auto()
+    drama = auto()
+    pure = auto()
+    sensibility = auto()
+    thrill = auto()
+    historical = auto()
+    sports = auto()
+
+
+genreDict = {
+    '에피소드': "episode",
+    '옴니버스': "omnibus",
+    '스토리': "story",
+    '일상': "daily",
+    '개그': "comic",
+    '판타지': "fantasy",
+    '액션': "action",
+    '드라마': "drama",
+    '순정': "pure",
+    '감성': "sensibility",
+    '스릴러': "thrill",
+    '무협/사극': "historical",
+    '스포츠': "sports",
+    '로맨스': "pure",
+}
+
+
 class Creation():
     def __init__(self) -> None:
         self.ageRate: AgeRate = AgeRate.ALL.value
@@ -48,7 +83,8 @@ class Creation():
         self.thumbnailImageAlt: str
         self.writer: str
         self.copy: str
-        self.genre: str
+        self.genre1: str
+        self.genre2: str
         self.week: list = list()
         pass
 
@@ -67,7 +103,7 @@ def main():
     driver = webdriver.Chrome(
         ChromeDriverManager().install(), chrome_options=chrome_options)
 
-    creationList: dict = dict()
+    creationList: dict = OrderedDict()
     weekdayList: list = [w.value for w in Weekday]
 
     weekday = 'mon'
@@ -134,6 +170,8 @@ def main():
         age = driver.find_elements(
             by=By.CSS_SELECTOR, value=".detail_info .age")
 
+        [genre1, genre2] = [g.strip() for g in genre.split(',')]
+
         if len(age) > 0:
             age = age.pop()
             age = age.text
@@ -153,7 +191,8 @@ def main():
 
         creation.writer = writer
         creation.copy = copy
-        creation.genre = genre
+        creation.genre1 = Genre[genreDict[genre1]].value
+        creation.genre2 = Genre[genreDict[genre2]].value
         creationList[str(titleId)] = creation
 
         driver.back()
