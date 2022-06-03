@@ -89,7 +89,7 @@ class Creation():
         self.genre1: str
         self.genre2: str
         self.week: list = list()
-        self.weekday: str = 'NNNNNNN'
+        self.weekdayYN: str = 'NNNNNNN'
         pass
 
     def __repr__(self) -> str:
@@ -97,10 +97,10 @@ class Creation():
 
     def updateWeekday(self, weekday: Weekday) -> None:
         index = weekdayList.index(weekday.value)
-        weekday = self.weekday
+        weekday = self.weekdayYN
         w = list(weekday)
         w[index] = 'Y'
-        self.weekday = ''.join(w)
+        self.weekdayYN = ''.join(w)
 
 
 def main():
