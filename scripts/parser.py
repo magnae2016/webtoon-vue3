@@ -22,21 +22,21 @@ class WebtoonViewerType(Enum):
 class Creation():
     def __init__(self) -> None:
         self.ageRate: AgeRate = AgeRate.ALL.value
-        self.newYN: String = 'N'
-        self.shortAniYN: String = 'N'
+        self.newYN: str = 'N'
+        self.shortAniYN: str = 'N'
         self.webtoonViewerType: WebtoonViewerType = WebtoonViewerType.DEFAULT.value
-        self.finished: String = 'N'
-        self.restYN: String = 'N'
-        self.starscoreToPercent: Number
-        self.starscoreViewFormat: String
-        self.titleName: String
+        self.finished: str = 'N'
+        self.restYN: str = 'N'
+        self.starscoreToPercent: float
+        self.starscoreViewFormat: str
+        self.titleName: str
         self.titleId: Number
-        self.thumbnailFilename: String
-        self.thumbnailFilepath: String
-        self.thumbnailImageAlt: String
-        self.writer: String
-        self.copy: String
-        self.genre: String
+        self.thumbnailFilename: str
+        self.thumbnailFilepath: str
+        self.thumbnailImageAlt: str
+        self.writer: str
+        self.copy: str
+        self.genre: str
         pass
 
     def __repr__(self) -> str:
