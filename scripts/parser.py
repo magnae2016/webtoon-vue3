@@ -1,3 +1,5 @@
+import pandas as pd
+from util import MySQLDB
 import os
 import json
 from enum import Enum, auto
@@ -84,8 +86,6 @@ class Creation():
         self.titleName: str
         self.titleId: Number
         self.thumbnailFilename: str
-        self.thumbnailFilepath: str
-        self.thumbnailImageAlt: str
         self.writer: str
         self.copy: str
         self.genre1: str
@@ -115,6 +115,8 @@ def main():
     if not os.path.exists('thumbnail'):
         os.makedirs('thumbnail')
 
+    conn = MySQLDB().getConnect()
+
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
@@ -142,7 +144,6 @@ def main():
             d = filepath.rfind('/')
 
             thumbnailFilename = filepath[d+1:]
-            thumbnailFilepath = filepath[:d+1]
             titleId = int(filepath[1:filepath[1:].index('/')+1])
             creation = creationList.get(str(titleId)) or Creation()
             creation.week.append(weekday)
@@ -152,7 +153,6 @@ def main():
                 continue
 
             creation.thumbnailFilename = thumbnailFilename.strip()
-            creation.thumbnailFilepath = thumbnailFilepath.strip()
             creation.titleId = titleId
             saveImage(src, thumbnailFilename, 'thumbnail')
 
@@ -166,7 +166,6 @@ def main():
                 by=By.CSS_SELECTOR, value=".rating_type strong").text
 
             creation.titleName = titleName
-            creation.thumbnailImageAlt = titleName
             creation.starscoreToPercent = starscoreToPercent
             creation.starscoreViewFormat = starscoreViewFormat
 
@@ -222,9 +221,13 @@ def main():
             print(creation)
             driver.back()
 
-        pp.pprint(creationList)
-        pass
     driver.quit()
+
+    for key, value in creationList.items():
+        data = value.__dict__
+        del data['week']
+        df = pd.DataFrame.from_dict([data], orient="columns")
+        df.to_sql(index=False, name="CREATION", con=conn, if_exists='append')
 
 
 if __name__ == "__main__":
