@@ -116,102 +116,105 @@ def main():
 
     creationList: dict = OrderedDict()
 
-    weekday = 'mon'
-    driver.get(f"https://comic.naver.com/webtoon/weekdayList?week={weekday}")
+    for weekday in weekdayList:
+        print(f"https://comic.naver.com/webtoon/weekdayList?week={weekday}")
+        driver.get(
+            f"https://comic.naver.com/webtoon/weekdayList?week={weekday}")
 
-    img_list = driver.find_element(By.CLASS_NAME, 'img_list')
-    list = img_list.find_elements(by=By.TAG_NAME, value="li")
+        img_list = driver.find_element(By.CLASS_NAME, 'img_list')
+        list = img_list.find_elements(by=By.TAG_NAME, value="li")
 
-    for i in range(len(list)):
-        li = driver.find_elements(
-            by=By.CSS_SELECTOR, value=f".img_list li")[i]
-        src = li.find_element(by=By.TAG_NAME, value="img").get_attribute("src")
-        filepath = src[len(SHARED_COMIC_PSTATIC_URL):]
-        d = filepath.rfind('/')
+        for i in range(len(list)):
+            li = driver.find_elements(
+                by=By.CSS_SELECTOR, value=f".img_list li")[i]
+            src = li.find_element(
+                by=By.TAG_NAME, value="img").get_attribute("src")
+            filepath = src[len(SHARED_COMIC_PSTATIC_URL):]
+            d = filepath.rfind('/')
 
-        thumbnailFilename = filepath[d+1:]
-        thumbnailFilepath = filepath[:d+1]
-        titleId = int(filepath[1:filepath[1:].index('/')+1])
-        creation = creationList.get(str(titleId)) or Creation()
-        creation.week.append(weekday)
-        creation.updateWeekday(Weekday[weekday.upper()])
+            thumbnailFilename = filepath[d+1:]
+            thumbnailFilepath = filepath[:d+1]
+            titleId = int(filepath[1:filepath[1:].index('/')+1])
+            creation = creationList.get(str(titleId)) or Creation()
+            creation.week.append(weekday)
+            creation.updateWeekday(Weekday[weekday.upper()])
 
-        if len(creation.week) > 1:
-            continue
+            if len(creation.week) > 1:
+                continue
 
-        creation.thumbnailFilename = thumbnailFilename.strip()
-        creation.thumbnailFilepath = thumbnailFilepath.strip()
-        creation.titleId = titleId
+            creation.thumbnailFilename = thumbnailFilename.strip()
+            creation.thumbnailFilepath = thumbnailFilepath.strip()
+            creation.titleId = titleId
 
-        dl = li.find_element(by=By.TAG_NAME, value="dl")
-        titleName = dl.find_element(
-            by=By.XPATH, value=".//dt/a").get_attribute("title").strip()
-        starscoreToPercent = dl.find_element(
-            by=By.CSS_SELECTOR, value="span.star em").get_attribute("style")
-        starscoreToPercent = float(starscoreToPercent.split(': ')[1][:-2])
-        starscoreViewFormat = dl.find_element(
-            by=By.CSS_SELECTOR, value=".rating_type strong").text
+            dl = li.find_element(by=By.TAG_NAME, value="dl")
+            titleName = dl.find_element(
+                by=By.XPATH, value=".//dt/a").get_attribute("title").strip()
+            starscoreToPercent = dl.find_element(
+                by=By.CSS_SELECTOR, value="span.star em").get_attribute("style")
+            starscoreToPercent = float(starscoreToPercent.split(': ')[1][:-2])
+            starscoreViewFormat = dl.find_element(
+                by=By.CSS_SELECTOR, value=".rating_type strong").text
 
-        creation.titleName = titleName
-        creation.thumbnailImageAlt = titleName
-        creation.starscoreToPercent = starscoreToPercent
-        creation.starscoreViewFormat = starscoreViewFormat
+            creation.titleName = titleName
+            creation.thumbnailImageAlt = titleName
+            creation.starscoreToPercent = starscoreToPercent
+            creation.starscoreViewFormat = starscoreViewFormat
 
-        elements = li.find_elements(
-            by=By.XPATH, value=".//div[@class='thumb']/a/span[@class='mask']/following-sibling::*")
-        if len(elements) > 0:
-            for element in elements:
-                class_name = element.get_attribute("class")
-                if class_name == 'ico_new2':
-                    creation.newYN = 'Y'
-                elif class_name == 'ico_short_ani':
-                    creation.webtoonViewerType = WebtoonViewerType.SHORTANI
-                elif class_name == 'ico_cut':
-                    creation.webtoonViewerType = WebtoonViewerType.CUTTOON.value
-                elif class_name == 'finish':
-                    creation.finished = 'Y'
-                pass
+            elements = li.find_elements(
+                by=By.XPATH, value=".//div[@class='thumb']/a/span[@class='mask']/following-sibling::*")
+            if len(elements) > 0:
+                for element in elements:
+                    class_name = element.get_attribute("class")
+                    if class_name == 'ico_new2':
+                        creation.newYN = 'Y'
+                    elif class_name == 'ico_short_ani':
+                        creation.webtoonViewerType = WebtoonViewerType.SHORTANI
+                    elif class_name == 'ico_cut':
+                        creation.webtoonViewerType = WebtoonViewerType.CUTTOON.value
+                    elif class_name == 'finish':
+                        creation.finished = 'Y'
+                    pass
 
-        li.find_element(
-            by=By.XPATH, value=".//div[@class='thumb']/a").click()
-        writer = driver.find_element(by=By.CLASS_NAME, value="wrt_nm").text
-        copy = driver.find_element(
-            by=By.CSS_SELECTOR, value=".detail h2 + p").text
-        genre = driver.find_element(
-            by=By.CSS_SELECTOR, value=".detail_info .genre").text
-        age = driver.find_elements(
-            by=By.CSS_SELECTOR, value=".detail_info .age")
+            li.find_element(
+                by=By.XPATH, value=".//div[@class='thumb']/a").click()
+            writer = driver.find_element(by=By.CLASS_NAME, value="wrt_nm").text
+            copy = driver.find_element(
+                by=By.CSS_SELECTOR, value=".detail h2 + p").text
+            genre = driver.find_element(
+                by=By.CSS_SELECTOR, value=".detail_info .genre").text
+            age = driver.find_elements(
+                by=By.CSS_SELECTOR, value=".detail_info .age")
 
-        [genre1, genre2] = [g.strip() for g in genre.split(',')]
+            [genre1, genre2] = [g.strip() for g in genre.split(',')]
 
-        if len(age) > 0:
-            age = age.pop()
-            age = age.text
-            if age == "전체연령가":
-                creation.ageRate = AgeRate.ALL.value
-            elif age == "12세 이용가":
-                creation.ageRate = AgeRate.RATE_12.value
-            elif age == "15세 이용가":
-                creation.ageRate = AgeRate.RATE_15.value
-            elif age == "18세 이용가":
-                creation.ageRate = AgeRate.RATE_18.value
+            if len(age) > 0:
+                age = age.pop()
+                age = age.text
+                if age == "전체연령가":
+                    creation.ageRate = AgeRate.ALL.value
+                elif age == "12세 이용가":
+                    creation.ageRate = AgeRate.RATE_12.value
+                elif age == "15세 이용가":
+                    creation.ageRate = AgeRate.RATE_15.value
+                elif age == "18세 이용가":
+                    creation.ageRate = AgeRate.RATE_18.value
 
-        ico_break = driver.find_elements(
-            by=By.CSS_SELECTOR, value=".detail .ico_break")
-        if len(ico_break) > 0:
-            creation.restYN = 'Y'
+            ico_break = driver.find_elements(
+                by=By.CSS_SELECTOR, value=".detail .ico_break")
+            if len(ico_break) > 0:
+                creation.restYN = 'Y'
 
-        creation.writer = writer
-        creation.copy = copy
-        creation.genre1 = Genre[genreDict[genre1]].value
-        creation.genre2 = Genre[genreDict[genre2]].value
-        creationList[str(titleId)] = creation
+            creation.writer = writer
+            creation.copy = copy
+            creation.genre1 = Genre[genreDict[genre1]].value
+            creation.genre2 = Genre[genreDict[genre2]].value
+            creationList[str(titleId)] = creation
+            print(creation)
+            driver.back()
 
-        driver.back()
-
-    pp.pprint(creationList)
+        pp.pprint(creationList)
+        pass
     driver.quit()
-    pass
 
 
 if __name__ == "__main__":
