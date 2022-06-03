@@ -5,6 +5,8 @@ from xmlrpc.client import Boolean
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+import pprint
+pp = pprint.PrettyPrinter(depth=4)
 
 
 class AgeRate(Enum):
@@ -17,6 +19,16 @@ class AgeRate(Enum):
 class WebtoonViewerType(Enum):
     DEFAULT = 1
     CUTTOON = 2
+
+
+class Weekday(Enum):
+    MON = 'mon'
+    TUE = 'tue'
+    WED = 'wed'
+    THU = 'thu'
+    FRI = 'fri'
+    SAT = 'sat'
+    SUN = 'sun'
 
 
 class Creation():
@@ -37,6 +49,7 @@ class Creation():
         self.writer: str
         self.copy: str
         self.genre: str
+        self.week: list = list()
         pass
 
     def __repr__(self) -> str:
@@ -54,7 +67,11 @@ def main():
     driver = webdriver.Chrome(
         ChromeDriverManager().install(), chrome_options=chrome_options)
 
-    driver.get("https://comic.naver.com/webtoon/genre?genre=episode")
+    creationList: dict = dict()
+    weekdayList: list = [w.value for w in Weekday]
+
+    weekday = 'mon'
+    driver.get(f"https://comic.naver.com/webtoon/weekdayList?week={weekday}")
 
     img_list = driver.find_element(By.CLASS_NAME, 'img_list')
     list = img_list.find_elements(by=By.TAG_NAME, value="li")
@@ -62,7 +79,6 @@ def main():
     for i in range(len(list)):
         li = driver.find_elements(
             by=By.CSS_SELECTOR, value=f".img_list li")[i]
-        creation = Creation()
         src = li.find_element(by=By.TAG_NAME, value="img").get_attribute("src")
         filepath = src[len(SHARED_COMIC_PSTATIC_URL):]
         d = filepath.rfind('/')
@@ -70,6 +86,10 @@ def main():
         thumbnailFilename = filepath[d+1:]
         thumbnailFilepath = filepath[:d+1]
         titleId = int(filepath[1:filepath[1:].index('/')+1])
+        creation = creationList.get(str(titleId)) or Creation()
+        creation.week.append(weekday)
+        if len(creation.week) > 1:
+            continue
 
         creation.thumbnailFilename = thumbnailFilename.strip()
         creation.thumbnailFilepath = thumbnailFilepath.strip()
@@ -134,10 +154,11 @@ def main():
         creation.writer = writer
         creation.copy = copy
         creation.genre = genre
+        creationList[str(titleId)] = creation
 
         driver.back()
-        print(creation)
 
+    pp.pprint(creationList)
     driver.quit()
     pass
 
