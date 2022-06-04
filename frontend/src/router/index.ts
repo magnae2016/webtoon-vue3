@@ -6,12 +6,16 @@ import WeekdayListView from "@/views/WeekdayListView.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
+    redirect: "/webtoon",
+  },
+  {
+    path: "/webtoon",
     name: "webtoon",
     component: WebtoonView,
     children: [
       {
         path: "",
-        redirect: "/weekday",
+        redirect: "/webtoon/weekday",
       },
       {
         path: "weekday",
@@ -23,18 +27,17 @@ const routes: Array<RouteRecordRaw> = [
         name: "weekdayList",
         component: WeekdayListView,
       },
+      {
+        path: "genre",
+        name: "genre",
+        component: () => import("@/views/GenreView.vue"),
+      },
     ],
-  },
-  {
-    path: "/genre",
-    name: "genre",
-    // route level code-splitting
-    component: () => import("@/views/GenreView.vue"),
   },
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.VUE_APP_BASE_URL),
+  history: createWebHistory(),
   routes,
 });
 

@@ -35,7 +35,9 @@
             target="_blank"
             >NAVER</a
           >
-          <router-link to="/" title="웹툰" class="gnb_comic">웹툰</router-link>
+          <router-link to="/webtoon" title="웹툰" class="gnb_comic"
+            >웹툰</router-link
+          >
           <em class="bar">|</em>
           <router-link to="#" title="웹소설" class="gnb_novel"
             >웹소설</router-link
@@ -99,7 +101,7 @@
             </a>
           </li>
         </router-link>
-        <router-link to="" custom v-slot="{ href, navigate, isActive }">
+        <router-link to="/webtoon" custom v-slot="{ href, navigate, isActive }">
           <li :class="[isActive && 'current']">
             <a :href="href" @click="navigate">
               <span class="Ntxt_webtoon">웹툰</span>
@@ -127,7 +129,7 @@
     <div id="submenu">
       <ul class="submenu">
         <router-link
-          to="/weekday"
+          to="/webtoon/weekday"
           custom
           v-slot="{ href, navigate, isExactActive }"
         >
@@ -138,7 +140,7 @@
           </li>
         </router-link>
         <router-link
-          to="/genre"
+          to="/webtoon/genre"
           custom
           v-slot="{ href, navigate, isExactActive }"
         >
