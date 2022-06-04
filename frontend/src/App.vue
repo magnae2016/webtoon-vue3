@@ -12,4 +12,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+@import "@/assets/comic.css";
+</style>

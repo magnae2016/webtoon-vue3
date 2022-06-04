@@ -6,6 +6,4 @@
 export default {};
 </script>
 
-<style>
-@import "@/assets/comic.css";
-</style>
+<style></style>
