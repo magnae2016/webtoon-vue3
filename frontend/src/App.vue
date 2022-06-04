@@ -1,10 +1,15 @@
 <template>
-  <nav>
-    <router-link to="/weekday">weekday</router-link> |
-    <router-link to="/weekdayList">weekdayList</router-link> |
-    <router-link to="/genre">genre</router-link>
-  </nav>
-  <router-view />
+  <div id="wrap">
+    <AppHeader />
+    <router-view></router-view>
+  </div>
 </template>
+
+<script lang="ts">
+import AppHeader from "@/components/layout/AppHeader.vue";
+export default {
+  components: { AppHeader },
+};
+</script>
 
 <style></style>

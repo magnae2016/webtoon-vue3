@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 </template>
 
-<script>
+<script lang="ts">
 export default {};
 </script>
 
-<style></style>
+<style>
+@import "@/assets/comic.css";
+</style>
