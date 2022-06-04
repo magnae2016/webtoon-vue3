@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHistory("/webtoon/"),
+  history: createWebHistory(process.env.VUE_APP_BASE_URL),
   routes,
 });
 
