@@ -10,6 +10,10 @@ const routes: Array<RouteRecordRaw> = [
     component: WebtoonView,
     children: [
       {
+        path: "",
+        redirect: "/weekday",
+      },
+      {
         path: "weekday",
         name: "weekday",
         component: WeekdayView,
