@@ -1,17 +1,23 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "@/views/HomeView.vue";
+import WeekdayView from "@/views/WeekdayView.vue";
+import WeekdayListView from "@/views/WeekdayListView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    name: "home",
-    component: HomeView,
+    path: "/weekday",
+    name: "weekday",
+    component: WeekdayView,
   },
   {
-    path: "/about",
-    name: "about",
+    path: "/weekdayList",
+    name: "weekdayList",
+    component: WeekdayListView,
+  },
+  {
+    path: "/genre",
+    name: "genre",
     // route level code-splitting
-    component: () => import("@/views/AboutView.vue"),
+    component: () => import("@/views/GenreView.vue"),
   },
 ];
 
