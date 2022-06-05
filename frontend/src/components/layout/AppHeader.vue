@@ -133,7 +133,12 @@
           custom
           v-slot="{ href, navigate, isExactActive }"
         >
-          <li :class="[isExactActive && 'on']">
+          <li
+            :class="[
+              (isExactActive && 'on') ||
+                ($route.path.includes('weekdayList') && 'on'),
+            ]"
+          >
             <a :href="href" @click="navigate">
               <span class="Ntxt_menu_date">요일별</span>
             </a>
