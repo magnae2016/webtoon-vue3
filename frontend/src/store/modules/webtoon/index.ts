@@ -7,13 +7,16 @@ import { RealTimeRankChoiceItem } from "@/types/webtoon";
 
 export interface State {
   all: number[];
-  realTimeRankChoiceFavorite: RealTimeRankChoiceItem[];
+  realTimeRankChoice: {
+    user: RealTimeRankChoiceItem[];
+    update: RealTimeRankChoiceItem[];
+  };
 }
 
 // initial state
 const state: State = {
   all: [1, 2, 3],
-  realTimeRankChoiceFavorite: [],
+  realTimeRankChoice: { user: [], update: [] },
 };
 
 export const webtoon: Module<State, RootState> = {

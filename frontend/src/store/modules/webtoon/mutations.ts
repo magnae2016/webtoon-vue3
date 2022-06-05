@@ -1,12 +1,15 @@
-import { SET_REALTIME_RANK_CHOICE_FAVORITE } from "./mutation-types";
+import { SET_REALTIME_RANK_CHOICE } from "./mutation-types";
 import { State } from ".";
 import { RealTimeRankChoiceItem } from "@/types/webtoon";
 
 export default {
-  [SET_REALTIME_RANK_CHOICE_FAVORITE](
+  [SET_REALTIME_RANK_CHOICE](
     state: State,
-    payload: RealTimeRankChoiceItem[]
+    payload: {
+      user: RealTimeRankChoiceItem[];
+      update: RealTimeRankChoiceItem[];
+    }
   ) {
-    state.realTimeRankChoiceFavorite = payload;
+    state.realTimeRankChoice = payload;
   },
 };
