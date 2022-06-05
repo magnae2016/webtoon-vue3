@@ -3,6 +3,12 @@ export enum Order {
   Update = "Update",
 }
 
+export enum ArrowType {
+  arrow_no = "변동없음",
+  arrow_up = "순위상승",
+  arrow_down = "순위하락",
+}
+
 export interface WebtoonItem {
   ageGroupCode: string;
   ageGroupName: string;
