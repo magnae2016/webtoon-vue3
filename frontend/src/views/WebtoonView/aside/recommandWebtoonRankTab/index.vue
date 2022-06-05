@@ -82,6 +82,48 @@
             </span>
           </div>
         </li>
+        <li id="recommandLi_4" class="rank05">
+          <div class="thumb6">
+            <a
+              id="recommand_link_4"
+              href="/webtoon/detail?titleId=774831&amp;no=49"
+              title="수희0(tngmlek0)"
+            >
+              <img
+                id="recommand_thumbnail_4"
+                src="https://shared-comic.pstatic.net/thumb/webtoon/774831/thumbnail/thumbnail_IMAG10_8e6c777a-e214-427f-b3f9-a75a9116897c.jpg"
+                width="30"
+                height="33"
+                alt="수희0(tngmlek0)"
+                title="수희0(tngmlek0)"
+              />
+              <span class="mask"></span>
+            </a>
+          </div>
+          <div class="rc_info">
+            <a
+              id="recommand_titleName_4"
+              href="/webtoon/detail?titleId=774831&amp;no=49"
+              class="tit"
+              title="수희0(tngmlek0)"
+              >수희0(tngmlek0)</a
+            >
+            <em
+              ><a id="recommand_painter_4" href="#" title="생일기분"
+                >생일기분</a
+              ></em
+            >
+            <span class="rankBox2">
+              <img
+                id="recommand_img_4"
+                src="https://ssl.pstatic.net/static/comic/images/migration/common/arrow_up.gif"
+                title="순위상승"
+                alt="순위하락"
+                class=""
+              /><em id="recommand_rank_4">1</em>
+            </span>
+          </div>
+        </li>
       </ol>
     </div>
   </div>

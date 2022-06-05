@@ -52,6 +52,38 @@
             0
           </span>
         </li>
+        <li class="rank07">
+          <a
+            href="/webtoon/detail?titleId=774831&amp;no=49"
+            title="수희0(tngmlek0)-49화"
+            >수희0(tngmlek0)-49화</a
+          >
+          <span class="rankBox">
+            <img
+              src="https://ssl.pstatic.net/static/comic/images/migration/common/arrow_up.gif"
+              title="순위상승"
+              alt="순위상승"
+              width="7"
+              height="10"
+            />1
+          </span>
+        </li>
+        <li class="rank08">
+          <a
+            href="/webtoon/detail?titleId=783051&amp;no=31"
+            title="존망코인-31화 넣었어..?"
+            >존망코인-31화 넣었어..?</a
+          >
+          <span class="rankBox">
+            <img
+              src="https://ssl.pstatic.net/static/comic/images/migration/common/arrow_down.gif"
+              title="순위하락"
+              alt="순위하락"
+              width="7"
+              height="10"
+            />1
+          </span>
+        </li>
       </ol>
     </div>
   </div>
