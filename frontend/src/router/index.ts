@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import WebtoonView from "@/views/WebtoonView.vue";
+import WebtoonView from "@/views/WebtoonView/index.vue";
 import WeekdayView from "@/views/WeekdayView.vue";
 import WeekdayListView from "@/views/WeekdayListView.vue";
 
