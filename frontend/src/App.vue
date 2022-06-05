@@ -6,10 +6,17 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
+import { useStore } from "@/store";
 import AppHeader from "@/components/layout/AppHeader.vue";
-export default {
+
+export default defineComponent({
   components: { AppHeader },
-};
+  setup() {
+    const store = useStore();
+    console.log(store.state.count);
+  },
+});
 </script>
 
 <style>
