@@ -11,8 +11,14 @@
     </h4>
     <div>
       <ul class="asideBoxTab">
-        <li id="realTimeRankChoiceTabFavorite" class="choice">
-          <a id="realTimeRankChoiceTabFavoriteClick" href="#"
+        <li
+          id="realTimeRankChoiceTabFavorite"
+          :class="{ choice: activeTab === Tabs.Favorite }"
+        >
+          <a
+            id="realTimeRankChoiceTabFavoriteClick"
+            href="#"
+            @click.prevent="activeTab = Tabs.Favorite"
             ><img
               src="https://ssl.pstatic.net/static/comic/images/migration/common/tab_txt_favor.gif"
               title="인기순"
@@ -21,8 +27,14 @@
               height="12"
           /></a>
         </li>
-        <li id="realTimeRankChoiceTabUpdate">
-          <a id="realTimeRankChoiceTabUpdateClick" href="#"
+        <li
+          id="realTimeRankChoiceTabUpdate"
+          :class="{ choice: activeTab === Tabs.Update }"
+        >
+          <a
+            id="realTimeRankChoiceTabUpdateClick"
+            href="#"
+            @click.prevent="activeTab = Tabs.Update"
             ><img
               src="https://ssl.pstatic.net/static/comic/images/migration/common/tab_txt_update.gif"
               title="업데이트순"
@@ -89,8 +101,49 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { defineComponent, computed, ref } from "vue";
+import { useStore } from "@/store";
+import RankListItem from "./RankListItem.vue";
+import ArrowIcon from "@/components/ui/ArrowIcon.vue";
+import { ArrowType, RealTimeRankChoiceItem } from "@/types/webtoon";
+
+enum Tabs {
+  Favorite = "favorite",
+  Update = "update",
+}
+
+export default defineComponent({
+  components: { RankListItem, ArrowIcon },
+  setup() {
+    const store = useStore();
+    store.dispatch("webtoon/getRealTimeRankChoice");
+
+    const activeTab = ref<Tabs>(Tabs.Favorite);
+    const getArrowTypeByChangeRank = (
+      item: RealTimeRankChoiceItem
+    ): ArrowType => {
+      const diff = item.rank - item.beforeRank;
+      if (diff > 0) return ArrowType.arrow_up;
+      else if (diff < 0) return ArrowType.arrow_down;
+      else return ArrowType.arrow_no;
+    };
+
+    const rankList = computed(() =>
+      activeTab.value === Tabs.Favorite
+        ? store.state.webtoon.realTimeRankChoice.user
+        : store.state.webtoon.realTimeRankChoice.update
+    );
+
+    return {
+      Tabs,
+      ArrowType,
+      activeTab,
+      rankList,
+      getArrowType: getArrowTypeByChangeRank,
+    };
+  },
+});
 </script>
 
 <style></style>
