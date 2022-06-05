@@ -15,6 +15,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     console.log(store.state.count);
+    console.log(store.state.webtoon.all.length);
   },
 });
 </script>
