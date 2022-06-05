@@ -29,6 +29,11 @@ export interface WebtoonItem {
   titleNameBy13: string;
 }
 
+export interface IRealTimeRankChoice {
+  user: RealTimeRankChoiceItem[];
+  update: RealTimeRankChoiceItem[];
+}
+
 export type RealTimeRankChoiceItem = Pick<
   WebtoonItem,
   "beforeRank" | "painter" | "rank" | "subtitle" | "titleId" | "titleName"

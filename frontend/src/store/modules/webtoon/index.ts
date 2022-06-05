@@ -3,14 +3,11 @@ import getters from "./getters";
 import * as actions from "./actions";
 import mutations from "./mutations";
 import { State as RootState } from "@/store";
-import { RealTimeRankChoiceItem } from "@/types/webtoon";
+import { IRealTimeRankChoice } from "@/types/webtoon";
 
 export interface State {
   all: number[];
-  realTimeRankChoice: {
-    user: RealTimeRankChoiceItem[];
-    update: RealTimeRankChoiceItem[];
-  };
+  realTimeRankChoice: IRealTimeRankChoice;
 }
 
 // initial state
