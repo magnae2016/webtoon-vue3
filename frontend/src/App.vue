@@ -1,12 +1,13 @@
 <template>
   <div id="wrap">
+    {{ realTimeRankChoiceFavorite }}
     <AppHeader />
     <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import { useStore } from "@/store";
 import AppHeader from "@/components/layout/AppHeader.vue";
 
@@ -14,8 +15,14 @@ export default defineComponent({
   components: { AppHeader },
   setup() {
     const store = useStore();
-    console.log(store.state.count);
-    console.log(store.state.webtoon.all.length);
+
+    store.dispatch("webtoon/getRealTimeRankChoiceFavorite");
+
+    return {
+      realTimeRankChoiceFavorite: computed(
+        () => store.state.webtoon.realTimeRankChoiceFavorite
+      ),
+    };
   },
 });
 </script>
