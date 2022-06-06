@@ -1,14 +1,14 @@
 <template>
-  <div id="content" class="webtoon">
-    <nav-tabs></nav-tabs>
-  </div>
+  <webtoon-nav-tabs
+    v-if="['weekday', 'weekdayList'].includes(String($route.name))"
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import NavTabs from "@/components/ui/NavTabs.vue";
+import WebtoonNavTabs from "./WebtoonNavTabs.vue";
 export default defineComponent({
-  components: { NavTabs },
+  components: { WebtoonNavTabs },
 });
 </script>
 
