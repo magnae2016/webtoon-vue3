@@ -16,3 +16,20 @@ async function findMonthNewWebtoon(params) {
   }
 }
 exports.findMonthNewWebtoon = findMonthNewWebtoon;
+
+async function findWeekdayRecommendWebtoon({ day }) {
+  try {
+    let sql = Query.weekdayRecommendWebtoon;
+    const bind = [day];
+    const rows = await SQLHandler.query(sql, {
+      type: QueryTypes.SELECT,
+      rowsAsArray: false,
+      bind,
+    });
+
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+exports.findWeekdayRecommendWebtoon = findWeekdayRecommendWebtoon;

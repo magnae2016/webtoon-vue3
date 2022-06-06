@@ -1,7 +1,11 @@
 var express = require("express");
 var router = express.Router();
 const fs = require("fs");
-const { findMonthNewWebtoon } = require("../services/indexServices");
+const {
+  findMonthNewWebtoon,
+  findWeekdayRecommendWebtoon,
+} = require("../services/indexServices");
+const { getWeekNumber } = require("../utils");
 
 router.get("/realTimeRankChoice", function (req, res, next) {
   const { m = "list", order } = req.query;
@@ -33,4 +37,16 @@ router.get("/monthNewWebtoon", async function (req, res, next) {
     res.sendStatus(500);
   }
 });
+
+router.get("/weekdayRecommendWebtoon", async function (req, res, next) {
+  try {
+    const { week } = req.query;
+    const day = getWeekNumber(week);
+    const body = await findWeekdayRecommendWebtoon({ day });
+    res.json(body);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+});
+
 module.exports = router;
