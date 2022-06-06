@@ -3,8 +3,10 @@
     v-if="['weekday', 'weekdayList'].includes(String($route.name))"
   />
   <genre-nav-tabs v-else-if="String($route.name) === 'genre'" />
-  <webtoon-spot />
-  <ad-banner-premium />
+  <template v-if="String($route.name) != 'genre'">
+    <webtoon-spot />
+    <ad-banner-premium />
+  </template>
 </template>
 
 <script lang="ts">
