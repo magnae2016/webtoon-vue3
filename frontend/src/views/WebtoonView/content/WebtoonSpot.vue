@@ -1,6 +1,6 @@
 <template>
   <div class="webtoon_spot2">
-    <h3 class="sub_tit">이달의 신규 웹툰</h3>
+    <subTitle>이달의 신규 웹툰</subTitle>
     <ul>
       <li>
         <div class="thumb7">
@@ -92,7 +92,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-export default defineComponent({});
+import SubTitle from "@/components/ui/SubTitle.vue";
+export default defineComponent({
+  components: { SubTitle },
+});
 </script>
 
 <style></style>
