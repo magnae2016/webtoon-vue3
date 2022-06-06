@@ -1,0 +1,5 @@
+SELECT *
+FROM CREATION
+WHERE newYN = 'Y'
+        AND randId >= FLOOR((RAND()*100000000))
+ORDER BY  randId ASC LIMIT 3; 

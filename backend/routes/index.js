@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const fs = require("fs");
+const { findMonthNewWebtoon } = require("../services/indexServices");
 
 router.get("/realTimeRankChoice", function (req, res, next) {
   const { m = "list", order } = req.query;
@@ -24,4 +25,12 @@ router.get("/realTimeRankChoice", function (req, res, next) {
   }
 });
 
+router.get("/monthNewWebtoon", async function (req, res, next) {
+  try {
+    const body = await findMonthNewWebtoon();
+    res.json(body);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+});
 module.exports = router;
