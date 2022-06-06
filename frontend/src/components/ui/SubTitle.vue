@@ -1,5 +1,5 @@
 <template>
-  <h3 class="sub_tit"><slot></slot></h3>
+  <h3 class="sub_tit"><slot></slot><slot name="TODAY"></slot></h3>
 </template>
 
 <script lang="ts">
