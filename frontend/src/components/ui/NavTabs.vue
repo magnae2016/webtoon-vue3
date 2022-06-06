@@ -10,7 +10,7 @@
       </li>
     </router-link>
     <router-link
-      to="/webtoon/weekdayList?week=mon"
+      :to="{ name: 'weekdayList', query: { week: 'mon' } }"
       custom
       v-slot="{ href, navigate }"
     >
@@ -19,7 +19,7 @@
       </li>
     </router-link>
     <router-link
-      to="/webtoon/weekdayList?week=tue"
+      :to="{ name: 'weekdayList', query: { week: 'tue' } }"
       custom
       v-slot="{ href, navigate }"
     >
@@ -28,7 +28,7 @@
       </li>
     </router-link>
     <router-link
-      to="/webtoon/weekdayList?week=wed"
+      :to="{ name: 'weekdayList', query: { week: 'wed' } }"
       custom
       v-slot="{ href, navigate }"
     >
@@ -37,7 +37,7 @@
       </li>
     </router-link>
     <router-link
-      to="/webtoon/weekdayList?week=thu"
+      :to="{ name: 'weekdayList', query: { week: 'thu' } }"
       custom
       v-slot="{ href, navigate }"
     >
@@ -46,7 +46,7 @@
       </li>
     </router-link>
     <router-link
-      to="/webtoon/weekdayList?week=fri"
+      :to="{ name: 'weekdayList', query: { week: 'fri' } }"
       custom
       v-slot="{ href, navigate }"
     >
@@ -55,7 +55,7 @@
       </li>
     </router-link>
     <router-link
-      to="/webtoon/weekdayList?week=sat"
+      :to="{ name: 'weekdayList', query: { week: 'sat' } }"
       custom
       v-slot="{ href, navigate }"
     >
@@ -64,7 +64,7 @@
       </li>
     </router-link>
     <router-link
-      to="/webtoon/weekdayList?week=sun"
+      :to="{ name: 'weekdayList', query: { week: 'sun' } }"
       custom
       v-slot="{ href, navigate }"
     >
