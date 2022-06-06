@@ -1,5 +1,6 @@
 <template>
   <div>WeekdayListView</div>
+  <p>{{ $route.query.week }}</p>
 </template>
 
 <script lang="ts">
