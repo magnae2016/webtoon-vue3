@@ -1,6 +1,17 @@
 <template>
   <ul class="category_tab">
     <nav-tabs :routes="routes">
+      <template v-slot:weekday>
+        <router-link
+          to="/webtoon/weekday"
+          custom
+          v-slot="{ href, navigate, isExactActive }"
+        >
+          <li :class="[isExactActive && 'on']">
+            <a :href="href" @click="navigate">요일전체</a>
+          </li>
+        </router-link>
+      </template>
       <template v-slot="slotProps">
         <li
           :class="[

@@ -1,4 +1,5 @@
 <template>
+  <slot name="weekday"></slot>
   <router-link
     v-for="(route, index) in routes"
     :key="index"
