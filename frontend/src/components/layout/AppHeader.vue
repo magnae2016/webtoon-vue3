@@ -145,7 +145,7 @@
           </li>
         </router-link>
         <router-link
-          to="/webtoon/genre"
+          :to="{ name: 'genre', query: { genre: 'episode' } }"
           custom
           v-slot="{ href, navigate, isExactActive }"
         >
