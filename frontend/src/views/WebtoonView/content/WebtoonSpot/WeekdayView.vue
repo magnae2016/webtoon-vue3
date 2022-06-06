@@ -22,7 +22,7 @@
         <p class="author2">
           <a href="#" :title="item.writer">{{ item.writer }}</a>
         </p>
-        <p>{{ item.copy }}</p>
+        <p>{{ makeEllipsis(item.copy) }}</p>
       </li>
     </ul>
   </div>
@@ -37,9 +37,30 @@ export default defineComponent({
   components: { SubTitle },
   setup() {
     const store = useStore();
+    const makeEllipsis = (copy: string) => {
+      const MAX_LENGTH = 40;
+      const split: string[] = copy.split(" ");
+      const chars: string[] = [];
+      let len = 0;
+
+      while (len < MAX_LENGTH) {
+        const char = split.shift();
+        if (!char) break;
+        len += char.length;
+        len += 1;
+        chars.push(char);
+
+        if (len >= MAX_LENGTH) {
+          chars.push("...");
+          break;
+        }
+      }
+      return chars.join(" ");
+    };
 
     return {
       items: computed(() => store.state.webtoon.monthNewWebtoon),
+      makeEllipsis,
     };
   },
 });
