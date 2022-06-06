@@ -19,6 +19,12 @@ export enum ArrowType {
   arrow_down = "순위하락",
 }
 
+export enum WebtoonViewerType {
+  DEFAULT = 1,
+  CUTTOON = 2,
+  SHORTANI = 3,
+}
+
 export interface WebtoonItem {
   ageGroupCode: string;
   ageGroupName: string;

@@ -19,6 +19,11 @@
         <a href="#">
           <strong :title="item.titleName">{{ item.titleName }}</strong>
         </a>
+        <span
+          v-if="item.webtoonViewerType === WebtoonViewerType.CUTTOON"
+          class="ico_cut"
+          >컷툰</span
+        >
         <p class="author2">
           <a href="#" :title="item.writer">{{ item.writer }}</a>
         </p>
@@ -32,6 +37,7 @@
 import { computed, defineComponent } from "vue";
 import { useStore } from "@/store";
 import SubTitle from "@/components/ui/SubTitle.vue";
+import { WebtoonViewerType } from "@/types/webtoon";
 
 export default defineComponent({
   components: { SubTitle },
@@ -61,6 +67,7 @@ export default defineComponent({
     return {
       items: computed(() => store.state.webtoon.monthNewWebtoon),
       makeEllipsis,
+      WebtoonViewerType,
     };
   },
 });
