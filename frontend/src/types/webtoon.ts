@@ -29,6 +29,26 @@ export interface WebtoonItem {
   titleNameBy13: string;
 }
 
+export type CreationItem = {
+  id: number;
+  randId: number;
+  titleId: number;
+  titleName: string;
+  writer: string;
+  genre1: number;
+  genre2: number;
+  thumbnailFilename: string;
+  weekdayYN: string;
+  ageRate: number;
+  webtoonViewerType: number;
+  starscoreToPercent: number;
+  starscoreViewFormat: string;
+  copy: string;
+  newYN: string;
+  restYN: string;
+  finished: string;
+};
+
 export interface IRealTimeRankChoice {
   user: RealTimeRankChoiceItem[];
   update: RealTimeRankChoiceItem[];
