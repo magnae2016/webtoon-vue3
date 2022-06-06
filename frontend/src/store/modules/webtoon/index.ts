@@ -9,6 +9,7 @@ export interface State {
   all: number[];
   realTimeRankChoice: IRealTimeRankChoice;
   monthNewWebtoon: CreationItem[];
+  weekdayRecommendWebtoon: CreationItem[];
 }
 
 // initial state
@@ -16,6 +17,7 @@ const state: State = {
   all: [1, 2, 3],
   realTimeRankChoice: { user: [], update: [] },
   monthNewWebtoon: [],
+  weekdayRecommendWebtoon: [],
 };
 
 export const webtoon: Module<State, RootState> = {
