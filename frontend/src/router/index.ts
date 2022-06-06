@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import WebtoonView from "@/views/WebtoonView/index.vue";
 import WeekdayView from "@/views/WeekdayView.vue";
 import WeekdayListView from "@/views/WeekdayListView.vue";
+import { store } from "@/store";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,6 +22,10 @@ const routes: Array<RouteRecordRaw> = [
         path: "weekday",
         name: "weekday",
         component: WeekdayView,
+        beforeEnter: () => {
+          store.dispatch("webtoon/getMonthNewWebtoon");
+          return true;
+        },
       },
       {
         path: "weekdayList",
