@@ -1,5 +1,6 @@
 <template>
   <div>GenreView</div>
+  <p>{{ $route.query.genre }}</p>
 </template>
 
 <script lang="ts">
