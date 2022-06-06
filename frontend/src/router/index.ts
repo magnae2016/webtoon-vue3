@@ -31,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
         path: "weekdayList",
         name: "weekdayList",
         component: WeekdayListView,
+        beforeEnter: (to, from, next) => {
+          const { week } = to.query;
+          store.dispatch("webtoon/getWeekdayRecommendWebtoon", { week });
+          next();
+        },
       },
       {
         path: "genre",
