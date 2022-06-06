@@ -57,6 +57,7 @@ export default defineComponent({
         chars.push(char);
 
         if (len >= MAX_LENGTH) {
+          chars.pop();
           chars.push("...");
           break;
         }
