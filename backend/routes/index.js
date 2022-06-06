@@ -30,8 +30,11 @@ router.get("/realTimeRankChoice", function (req, res, next) {
 });
 
 router.get("/monthNewWebtoon", async function (req, res, next) {
+  const { m = "list" } = req.query;
+
   try {
-    const body = await findMonthNewWebtoon();
+    const data = await findMonthNewWebtoon();
+    const body = { [m]: data };
     res.json(body);
   } catch (error) {
     res.sendStatus(500);
@@ -39,10 +42,13 @@ router.get("/monthNewWebtoon", async function (req, res, next) {
 });
 
 router.get("/weekdayRecommendWebtoon", async function (req, res, next) {
+  const { m = "list" } = req.query;
+  
   try {
     const { week } = req.query;
     const day = getWeekNumber(week);
-    const body = await findWeekdayRecommendWebtoon({ day });
+    const data =  await findWeekdayRecommendWebtoon({ day });
+    const body = { [m]: data };
     res.json(body);
   } catch (error) {
     res.sendStatus(500);
