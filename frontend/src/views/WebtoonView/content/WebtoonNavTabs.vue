@@ -30,6 +30,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import NavTabs from "@/components/ui/NavTabs.vue";
+import { Weekday } from "@/types/webtoon";
 export default defineComponent({
   components: { NavTabs },
   data() {
@@ -37,38 +38,38 @@ export default defineComponent({
       linkActiveClass: "on",
       routes: [
         {
-          to: { name: "weekdayList", query: { week: "mon" } },
-          week: "mon",
+          to: { name: "weekdayList", query: { week: Weekday.mon } },
+          week: Weekday.mon,
           text: "월요웹툰",
         },
         {
-          to: { name: "weekdayList", query: { week: "tue" } },
-          week: "tue",
+          to: { name: "weekdayList", query: { week: Weekday.tue } },
+          week: Weekday.tue,
           text: "화요웹툰",
         },
         {
-          to: { name: "weekdayList", query: { week: "wed" } },
-          week: "wed",
+          to: { name: "weekdayList", query: { week: Weekday.wed } },
+          week: Weekday.wed,
           text: "수요웹툰",
         },
         {
-          to: { name: "weekdayList", query: { week: "thu" } },
-          week: "thu",
+          to: { name: "weekdayList", query: { week: Weekday.thu } },
+          week: Weekday.thu,
           text: "목요웹툰",
         },
         {
-          to: { name: "weekdayList", query: { week: "fri" } },
-          week: "fri",
+          to: { name: "weekdayList", query: { week: Weekday.fri } },
+          week: Weekday.fri,
           text: "금요웹툰",
         },
         {
-          to: { name: "weekdayList", query: { week: "sat" } },
-          week: "sat",
+          to: { name: "weekdayList", query: { week: Weekday.sat } },
+          week: Weekday.sat,
           text: "토요웹툰",
         },
         {
-          to: { name: "weekdayList", query: { week: "sun" } },
-          week: "sun",
+          to: { name: "weekdayList", query: { week: Weekday.sun } },
+          week: Weekday.sun,
           text: "일요웹툰",
         },
       ],

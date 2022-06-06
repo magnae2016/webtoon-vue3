@@ -1,3 +1,13 @@
+export enum Weekday {
+  mon = "mon",
+  tue = "tue",
+  wed = "wed",
+  thu = "thu",
+  fri = "fri",
+  sat = "sat",
+  sun = "sun",
+}
+
 export enum Order {
   User = "User",
   Update = "Update",
