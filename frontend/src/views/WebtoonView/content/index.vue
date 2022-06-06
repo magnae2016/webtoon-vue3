@@ -13,7 +13,7 @@
 import { defineComponent } from "vue";
 import WebtoonNavTabs from "./WebtoonNavTabs.vue";
 import GenreNavTabs from "./GenreNavTabs.vue";
-import WebtoonSpot from "./WebtoonSpot.vue";
+import WebtoonSpot from "./WebtoonSpot/index.vue";
 import AdBannerPremium from "./AdBannerPremium.vue";
 export default defineComponent({
   components: { WebtoonNavTabs, GenreNavTabs, WebtoonSpot, AdBannerPremium },
