@@ -42,10 +42,9 @@ router.get("/monthNewWebtoon", async function (req, res, next) {
 });
 
 router.get("/weekdayRecommendWebtoon", async function (req, res, next) {
-  const { m = "list" } = req.query;
+  const { m = "list", week } = req.query;
   
   try {
-    const { week } = req.query;
     const day = getWeekNumber(week);
     const data =  await findWeekdayRecommendWebtoon({ day });
     const body = { [m]: data };
