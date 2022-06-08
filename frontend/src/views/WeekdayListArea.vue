@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul :class="{ img_list: $route.name === 'weekdayList' }">
     <li v-for="webtoon in webtoons" :key="webtoon.id">
       <slot :webtoon="webtoon"></slot>
     </li>
