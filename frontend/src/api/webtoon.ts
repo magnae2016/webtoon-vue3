@@ -11,6 +11,7 @@ const api = {
   realTimeRankChoice: "/realTimeRankChoice",
   monthNewWebtoon: "/monthNewWebtoon",
   weekdayRecommendWebtoon: "/weekdayRecommendWebtoon",
+  allWebtoons: "/allWebtoons",
 };
 
 export function fetchRealTimeRankChoice(params: {
@@ -31,4 +32,10 @@ export function fetchWeekdayRecommendWebtoon(params: {
   week: Weekday;
 }): AxiosPromise<{ list: CreationItem[] }> {
   return webtoon.get(api.weekdayRecommendWebtoon, { params });
+}
+
+export function fetchAllWebtoons(params: {
+  m?: string;
+}): AxiosPromise<{ list: { [key in Weekday]: CreationItem[] } }> {
+  return webtoon.get(api.allWebtoons, { params });
 }
