@@ -33,3 +33,18 @@ async function findWeekdayRecommendWebtoon({ day }) {
   }
 }
 exports.findWeekdayRecommendWebtoon = findWeekdayRecommendWebtoon;
+
+async function findAllWebtoons(params) {
+  try {
+    let sql = Query.allWebtoon;
+    const rows = await SQLHandler.query(sql, {
+      type: QueryTypes.SELECT,
+      rowsAsArray: false,
+    });
+
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+exports.findAllWebtoons = findAllWebtoons;
