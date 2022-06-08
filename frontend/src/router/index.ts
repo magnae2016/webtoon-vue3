@@ -13,6 +13,10 @@ const routes: Array<RouteRecordRaw> = [
     path: "/webtoon",
     name: "webtoon",
     component: WebtoonView,
+    beforeEnter: () => {
+      store.dispatch("webtoon/getAllWebtoons");
+      return true;
+    },
     children: [
       {
         path: "",

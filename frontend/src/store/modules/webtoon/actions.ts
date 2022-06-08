@@ -1,5 +1,6 @@
 import { Commit } from "vuex";
 import {
+  fetchAllWebtoons,
   fetchMonthNewWebtoon,
   fetchRealTimeRankChoice,
   fetchWeekdayRecommendWebtoon,
@@ -9,6 +10,7 @@ import {
   SET_REALTIME_RANK_CHOICE,
   SET_MONTH_NEW_WEBTOON,
   SET_WEEKDAY_RECOMMEND_WEBTOON,
+  SET_ALL_WEBTOONS,
 } from "./mutation-types";
 
 export const getRealTimeRankChoice = async ({ commit }: { commit: Commit }) => {
@@ -41,4 +43,12 @@ export const getWeekdayRecommendWebtoon = async (
     week,
   });
   commit(SET_WEEKDAY_RECOMMEND_WEBTOON, weekdayRecommendWebtoon.data[m]);
+};
+
+export const getAllWebtoons = async ({ commit }: { commit: Commit }) => {
+  const m = "list";
+  const allWebtoons = await fetchAllWebtoons({
+    m,
+  });
+  commit(SET_ALL_WEBTOONS, allWebtoons.data[m]);
 };
