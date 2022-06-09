@@ -84,4 +84,44 @@ router.get("/allWebtoons", async function (req, res, next) {
   }
 });
 
+router.get("/webtoonsByGenre", async function (req, res, next) {
+  const { m = "list" } = req.query;
+  const genres = [
+    "episode",
+    "omnibus",
+    "story",
+    "daily",
+    "comic",
+    "fantasy",
+    "action",
+    "drama",
+    "pure",
+    "sensibility",
+    "thrill",
+    "historical",
+    "sports",
+  ];
+
+  try {
+    const data = await findAllWebtoons();
+    const webtoons = [...Array(genres.length)].map((x) => []);
+    data.forEach((element) => {
+      const { genre1, genre2 } = element;
+      webtoons[genre1 - 1].push(element);
+      webtoons[genre2 - 1].push(element);
+    });
+
+    const zip = {};
+    genres.forEach((genre, index) => {
+      zip[genre] = webtoons[index];
+    });
+
+    const body = { [m]: zip };
+    res.json(body);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 module.exports = router;
