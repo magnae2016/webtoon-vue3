@@ -25,6 +25,22 @@ export enum WebtoonViewerType {
   SHORTANI = 3,
 }
 
+export enum Genres {
+  episode = "episode",
+  omnibus = "omnibus",
+  story = "story",
+  daily = "daily",
+  comic = "comic",
+  fantasy = "fantasy",
+  action = "action",
+  drama = "drama",
+  pure = "pure",
+  sensibility = "sensibility",
+  thrill = "thrill",
+  historical = "historical",
+  sports = "sports",
+}
+
 export interface WebtoonItem {
   ageGroupCode: string;
   ageGroupName: string;
