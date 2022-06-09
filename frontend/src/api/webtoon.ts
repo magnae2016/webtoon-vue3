@@ -1,5 +1,6 @@
 import {
   CreationItem,
+  Genres,
   Order,
   RealTimeRankChoiceResponse,
   Weekday,
@@ -12,6 +13,7 @@ const api = {
   monthNewWebtoon: "/monthNewWebtoon",
   weekdayRecommendWebtoon: "/weekdayRecommendWebtoon",
   allWebtoons: "/allWebtoons",
+  webtoonsByGenre: "/webtoonsByGenre",
 };
 
 export function fetchRealTimeRankChoice(params: {
@@ -38,4 +40,10 @@ export function fetchAllWebtoons(params: {
   m?: string;
 }): AxiosPromise<{ list: { [key in Weekday]: CreationItem[] } }> {
   return webtoon.get(api.allWebtoons, { params });
+}
+
+export function fetchWebtoonsByGenre(params: {
+  m?: string;
+}): AxiosPromise<{ list: { [key in Genres]: CreationItem[] } }> {
+  return webtoon.get(api.webtoonsByGenre, { params });
 }
