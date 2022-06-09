@@ -19,39 +19,7 @@
   <div class="list_area daily_img">
     <weekday-list-area v-if="week" :week="week">
       <template v-slot="slotProps">
-        <div class="thumb">
-          <a href="#" :title="slotProps.webtoon.titleName">
-            <img
-              :src="`https://shared-comic.pstatic.net/thumb/webtoon/${slotProps.webtoon.titleId}/thumbnail/${slotProps.webtoon.thumbnailFilename}`"
-              width="83"
-              height="90"
-              :title="slotProps.webtoon.titleName"
-              :alt="slotProps.webtoon.titleName"
-            />
-            <span class="mask"></span>
-          </a>
-        </div>
-        <dl>
-          <dt>
-            <a href="#" :title="slotProps.webtoon.titleName">{{
-              slotProps.webtoon.titleName
-            }}</a>
-          </dt>
-          <dd class="desc">
-            <a href="#">{{ slotProps.webtoon.writer }}</a>
-          </dd>
-          <dd>
-            <div class="rating_type">
-              <span class="star"
-                ><em :style="`width: ${slotProps.webtoon.starscoreToPercent}%`"
-                  >평점</em
-                ></span
-              >
-              <strong>{{ slotProps.webtoon.starscoreViewFormat }}</strong>
-            </div>
-          </dd>
-          <dd class="more"><a href="#">전체보기</a></dd>
-        </dl>
+        <img-list-item :webtoon="slotProps.webtoon"></img-list-item>
       </template>
     </weekday-list-area>
   </div>
@@ -63,10 +31,11 @@ import { onBeforeRouteUpdate, useRoute } from "vue-router";
 import { useStore } from "@/store";
 import SubTitle from "@/components/ui/SubTitle.vue";
 import WeekdayListArea from "./WeekdayListArea.vue";
+import ImgListItem from "@/components/ui/ImgListItem.vue";
 import { Weekday } from "@/types/webtoon";
 export default defineComponent({
   name: "WeekdayListView",
-  components: { SubTitle, WeekdayListArea },
+  components: { SubTitle, WeekdayListArea, ImgListItem },
   setup() {
     const store = useStore();
     const route = useRoute();
