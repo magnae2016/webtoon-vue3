@@ -45,6 +45,10 @@ const routes: Array<RouteRecordRaw> = [
         path: "genre",
         name: "genre",
         component: () => import("@/views/GenreView.vue"),
+        beforeEnter: () => {
+          store.dispatch("webtoon/getWebtoonsByGenre");
+          return true;
+        },
       },
     ],
   },
