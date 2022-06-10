@@ -145,7 +145,7 @@
           </li>
         </router-link>
         <router-link
-          :to="{ name: 'genre', query: { genre: 'episode' } }"
+          :to="{ name: 'genre' }"
           custom
           v-slot="{ href, navigate, isExactActive }"
         >

@@ -3,11 +3,7 @@
     <ul class="spot">
       <nav-tabs :routes="routes">
         <template v-slot="slotProps">
-          <li
-            :class="[
-              $route.query.genre === slotProps.item.genre && linkActiveClass,
-            ]"
-          >
+          <li :class="[genre === slotProps.item.genre && linkActiveClass]">
             <a :href="slotProps.href" @click="slotProps.navigate">{{
               slotProps.item.text
             }}</a>
@@ -20,7 +16,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
+import { useRoute } from "vue-router";
 import NavTabs from "@/components/ui/NavTabs.vue";
 export default defineComponent({
   components: { NavTabs },
@@ -96,6 +93,12 @@ export default defineComponent({
         },
       ],
     };
+  },
+  setup() {
+    const route = useRoute();
+    const genre = computed(() => route.query.genre || "episode");
+
+    return { genre };
   },
 });
 </script>
