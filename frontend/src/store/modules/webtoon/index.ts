@@ -3,12 +3,7 @@ import getters from "./getters";
 import * as actions from "./actions";
 import mutations from "./mutations";
 import { State as RootState } from "@/store";
-import {
-  CreationItem,
-  Genres,
-  IRealTimeRankChoice,
-  Weekday,
-} from "@/types/webtoon";
+import { CreationItem, G, IRealTimeRankChoice, Weekday } from "@/types/webtoon";
 
 export interface State {
   all: number[];
@@ -16,7 +11,7 @@ export interface State {
   monthNewWebtoon: CreationItem[];
   weekdayRecommendWebtoon: CreationItem[];
   allWebtoons: { [key in Weekday]: CreationItem[] };
-  webtoonsByGenre: { [key in Genres]: CreationItem[] };
+  webtoonsByGenre: Record<G, CreationItem[]>;
 }
 
 // initial state
@@ -35,19 +30,19 @@ const state: State = {
     [Weekday.sun]: [],
   },
   webtoonsByGenre: {
-    [Genres.episode]: [],
-    [Genres.omnibus]: [],
-    [Genres.story]: [],
-    [Genres.daily]: [],
-    [Genres.comic]: [],
-    [Genres.fantasy]: [],
-    [Genres.action]: [],
-    [Genres.drama]: [],
-    [Genres.pure]: [],
-    [Genres.sensibility]: [],
-    [Genres.thrill]: [],
-    [Genres.historical]: [],
-    [Genres.sports]: [],
+    episode: [],
+    omnibus: [],
+    story: [],
+    daily: [],
+    comic: [],
+    fantasy: [],
+    action: [],
+    drama: [],
+    pure: [],
+    sensibility: [],
+    thrill: [],
+    historical: [],
+    sports: [],
   },
 };
 

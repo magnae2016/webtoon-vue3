@@ -55,7 +55,7 @@ import { useStore } from "@/store";
 import { useRoute } from "vue-router";
 import SubTitle from "@/components/ui/SubTitle.vue";
 import ImgListItem from "@/components/ui/ImgListItem.vue";
-import { Genres } from "@/types/webtoon";
+import { G, Genres } from "@/types/webtoon";
 
 export default defineComponent({
   name: "GenreView",
@@ -64,30 +64,15 @@ export default defineComponent({
     const store = useStore();
     const route = useRoute();
 
-    const genre = computed(() => route.query.genre || "episode");
-    const genreTitleText: { [key in Genres]: string } = {
-      episode: "에피소드",
-      omnibus: "옴니버스",
-      story: "스토리",
-      daily: "일상",
-      comic: "개그",
-      fantasy: "판타지",
-      action: "액션",
-      drama: "드라마",
-      pure: "순정",
-      sensibility: "감성",
-      thrill: "스릴러",
-      historical: "무협/사극",
-      sports: "스포츠",
-    };
+    const genre = computed(() => (route.query.genre as G) || "episode");
 
     return {
       webtoonsByGenre: computed(
-        () => store.state.webtoon.webtoonsByGenre[genre.value as Genres]
+        () => store.state.webtoon.webtoonsByGenre[genre.value]
       ),
       Genres,
       genre,
-      titleText: computed(() => genreTitleText[genre.value as Genres]),
+      titleText: computed(() => Genres[genre.value]),
     };
   },
 });

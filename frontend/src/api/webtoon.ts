@@ -1,6 +1,6 @@
 import {
   CreationItem,
-  Genres,
+  G,
   Order,
   RealTimeRankChoiceResponse,
   Weekday,
@@ -44,6 +44,6 @@ export function fetchAllWebtoons(params: {
 
 export function fetchWebtoonsByGenre(params: {
   m?: string;
-}): AxiosPromise<{ list: { [key in Genres]: CreationItem[] } }> {
+}): AxiosPromise<{ list: Record<G, CreationItem[]> }> {
   return webtoon.get(api.webtoonsByGenre, { params });
 }
