@@ -55,7 +55,7 @@ import { useStore } from "@/store";
 import { useRoute } from "vue-router";
 import SubTitle from "@/components/ui/SubTitle.vue";
 import ImgListItem from "@/components/ui/ImgListItem.vue";
-import { Genres } from "@/types/webtoon";
+import { G, Genres } from "@/types/webtoon";
 
 export default defineComponent({
   name: "GenreView",
@@ -64,18 +64,15 @@ export default defineComponent({
     const store = useStore();
     const route = useRoute();
 
-    const genre = computed(() => route.query.genre || "episode");
+    const genre = computed(() => (route.query.genre as G) || "episode");
 
     return {
       webtoonsByGenre: computed(
-        () =>
-          store.state.webtoon.webtoonsByGenre[
-            genre.value as keyof typeof Genres
-          ]
+        () => store.state.webtoon.webtoonsByGenre[genre.value]
       ),
       Genres,
       genre,
-      titleText: computed(() => Genres[genre.value as keyof typeof Genres]),
+      titleText: computed(() => Genres[genre.value]),
     };
   },
 });

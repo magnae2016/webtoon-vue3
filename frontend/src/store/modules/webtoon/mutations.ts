@@ -6,12 +6,7 @@ import {
   SET_WEEKDAY_RECOMMEND_WEBTOON,
 } from "./mutation-types";
 import { State } from ".";
-import {
-  CreationItem,
-  Genres,
-  IRealTimeRankChoice,
-  Weekday,
-} from "@/types/webtoon";
+import { CreationItem, G, IRealTimeRankChoice, Weekday } from "@/types/webtoon";
 
 export default {
   [SET_REALTIME_RANK_CHOICE](state: State, payload: IRealTimeRankChoice) {
@@ -29,10 +24,7 @@ export default {
   ) {
     state.allWebtoons = payload;
   },
-  [SET_WEBTOONS_BY_GENRE](
-    state: State,
-    payload: Record<keyof typeof Genres, CreationItem[]>
-  ) {
+  [SET_WEBTOONS_BY_GENRE](state: State, payload: Record<G, CreationItem[]>) {
     state.webtoonsByGenre = payload;
   },
 };

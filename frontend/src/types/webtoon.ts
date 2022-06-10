@@ -41,6 +41,8 @@ export enum Genres {
   sports = "스포츠",
 }
 
+export type G = keyof typeof Genres;
+
 export interface WebtoonItem {
   ageGroupCode: string;
   ageGroupName: string;
