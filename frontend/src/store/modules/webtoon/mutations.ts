@@ -31,7 +31,7 @@ export default {
   },
   [SET_WEBTOONS_BY_GENRE](
     state: State,
-    payload: { [key in Genres]: CreationItem[] }
+    payload: Record<keyof typeof Genres, CreationItem[]>
   ) {
     state.webtoonsByGenre = payload;
   },

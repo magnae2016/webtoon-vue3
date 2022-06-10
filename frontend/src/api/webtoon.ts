@@ -44,6 +44,6 @@ export function fetchAllWebtoons(params: {
 
 export function fetchWebtoonsByGenre(params: {
   m?: string;
-}): AxiosPromise<{ list: { [key in Genres]: CreationItem[] } }> {
+}): AxiosPromise<{ list: Record<keyof typeof Genres, CreationItem[]> }> {
   return webtoon.get(api.webtoonsByGenre, { params });
 }

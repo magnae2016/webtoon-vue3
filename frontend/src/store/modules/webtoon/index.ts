@@ -16,7 +16,7 @@ export interface State {
   monthNewWebtoon: CreationItem[];
   weekdayRecommendWebtoon: CreationItem[];
   allWebtoons: { [key in Weekday]: CreationItem[] };
-  webtoonsByGenre: { [key in Genres]: CreationItem[] };
+  webtoonsByGenre: Record<keyof typeof Genres, CreationItem[]>;
 }
 
 // initial state
@@ -35,19 +35,19 @@ const state: State = {
     [Weekday.sun]: [],
   },
   webtoonsByGenre: {
-    [Genres.episode]: [],
-    [Genres.omnibus]: [],
-    [Genres.story]: [],
-    [Genres.daily]: [],
-    [Genres.comic]: [],
-    [Genres.fantasy]: [],
-    [Genres.action]: [],
-    [Genres.drama]: [],
-    [Genres.pure]: [],
-    [Genres.sensibility]: [],
-    [Genres.thrill]: [],
-    [Genres.historical]: [],
-    [Genres.sports]: [],
+    episode: [],
+    omnibus: [],
+    story: [],
+    daily: [],
+    comic: [],
+    fantasy: [],
+    action: [],
+    drama: [],
+    pure: [],
+    sensibility: [],
+    thrill: [],
+    historical: [],
+    sports: [],
   },
 };
 

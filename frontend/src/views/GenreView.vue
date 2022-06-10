@@ -65,29 +65,17 @@ export default defineComponent({
     const route = useRoute();
 
     const genre = computed(() => route.query.genre || "episode");
-    const genreTitleText: { [key in Genres]: string } = {
-      episode: "에피소드",
-      omnibus: "옴니버스",
-      story: "스토리",
-      daily: "일상",
-      comic: "개그",
-      fantasy: "판타지",
-      action: "액션",
-      drama: "드라마",
-      pure: "순정",
-      sensibility: "감성",
-      thrill: "스릴러",
-      historical: "무협/사극",
-      sports: "스포츠",
-    };
 
     return {
       webtoonsByGenre: computed(
-        () => store.state.webtoon.webtoonsByGenre[genre.value as Genres]
+        () =>
+          store.state.webtoon.webtoonsByGenre[
+            genre.value as keyof typeof Genres
+          ]
       ),
       Genres,
       genre,
-      titleText: computed(() => genreTitleText[genre.value as Genres]),
+      titleText: computed(() => Genres[genre.value as keyof typeof Genres]),
     };
   },
 });
